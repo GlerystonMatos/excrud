@@ -22,7 +22,7 @@ export default ({ route, navigation }) => {
     }
 
     return (
-        <View style={style.form}>
+        <View style={styles.conteiner}>
             <Input
                 label='Nome'
                 onChangeText={name => setUser({ ...user, name })}
@@ -32,17 +32,15 @@ export default ({ route, navigation }) => {
                 label='Email'
                 onChangeText={email => setUser({ ...user, email })}
                 placeholder='Informe o Email'
-                value={user.email}
-                style={style.input} />
+                value={user.email} />
             <Input
                 label='URL do Avatar'
                 onChangeText={avatarUrl => setUser({ ...user, avatarUrl })}
                 placeholder='Informe a URL do Avatar'
-                value={user.avatarUrl}
-                style={style.input} />
+                value={user.avatarUrl} />
             <Button
                 title='Salvar'
-                buttonStyle={style.buttonSalvar}
+                buttonStyle={styles.buttonSalvar}
                 onPress={() => {
                     dispatch({
                         type: user.id ? 'updateUser' : 'createUser',
@@ -52,15 +50,15 @@ export default ({ route, navigation }) => {
                 }} />
             <Button
                 title='Cancelar'
-                buttonStyle={style.buttonCancelar}
+                buttonStyle={styles.buttonCancelar}
                 onPress={() => confirmCancel()} />
         </View>
     )
 }
 
-const style = StyleSheet.create({
-    form: {
-        padding: 10,
+const styles = StyleSheet.create({
+    conteiner: {
+        padding: 20,
     },
     buttonSalvar: {
         backgroundColor: '#F4511E'
@@ -68,5 +66,5 @@ const style = StyleSheet.create({
     buttonCancelar: {
         marginTop: 5,
         backgroundColor: '#F4511E'
-    }
+    },
 })

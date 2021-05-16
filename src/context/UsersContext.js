@@ -26,6 +26,9 @@ const actions = {
             ...state,
             users: state.users.filter(u => u.id !== user.id)
         }
+    },
+    refreshUser(state, action) {
+        return initialState;
     }
 }
 

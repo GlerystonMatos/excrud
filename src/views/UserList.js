@@ -1,10 +1,19 @@
-import React, { useContext } from 'react';
 import UsersContext from '../context/UsersContext';
-import { View, FlatList, Alert } from 'react-native';
+import React, { useCallback, useContext, useState } from 'react';
+import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { ListItem, Avatar, Button, Icon } from 'react-native-elements';
 
 export default props => {
     const { state, dispatch } = useContext(UsersContext);
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        dispatch({
+            type: 'refreshUser',
+        })
+        setRefreshing(false);
+    }, []);
 
     function confirmUserDeletion(user) {
         Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
@@ -52,6 +61,12 @@ export default props => {
                 keyExtractor={user => user.id.toString()}
                 renderItem={getUserItem}
                 data={state.users}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
             />
         </View>
     )
